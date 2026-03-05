@@ -3,6 +3,7 @@ import geocoder # module installed to get location
 from config import apiKey #my personal api key
 import requests #library that lets your program talk to websites and APIs
 from PIL import Image, ImageTk # for handling of pictures
+import os 
 
 app=Tk()
 app.geometry('500x500') #size of window
@@ -42,7 +43,10 @@ weather_image = {
 
 if weather_main in weather_image: #dont fully understand
     # Open the image file that matches the current weather
-    img = Image.open(weather_image[weather_main])
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # __file__ is a special variable in Python that stores the path of the script you are currently running.
+    img_path = os.path.join(script_dir, weather_image[weather_main]) 
+    img = Image.open(img_path)
+   
     # Convert the PIL image into a format that Tkinter can display
     photo = ImageTk.PhotoImage(img)
     # Create a Tkinter Label widget that will display the image
